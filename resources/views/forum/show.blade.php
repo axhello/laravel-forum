@@ -100,6 +100,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {{--{{ dd($comment->likes->lists('name')->toArray()) }}--}}
                                     <footer class="Comment_footer clearfix">
                                         <div class="thumbs-like pull-left">
                                             <forum-post-like-button
@@ -109,7 +110,10 @@
                                                     @else
                                                     current-user=""
                                                     @endif
-                                                    user-liked="">
+                                                    {{--@foreach( as $like)--}}
+                                                    user-liked="{{ implode(',', $comment->likes->lists('name')->toArray()) }}"
+                                                    {{--@endforeach--}}
+                                            >
                                             </forum-post-like-button>
                                        </div>
                                        <div class="report-span pull-right">
@@ -165,9 +169,10 @@
                            </div>
                            <form method="POST" action="{{ url('') }}" class="col-md-10" accept-charset="UTF-8" id="reply_form" @submit.prevent="onSubmitForm()">
                                {{ csrf_field() }}
-                               <input name="_token" type="hidden" value="{{ $discussion->id }}">
+                               <input name="discussion_id" type="hidden" value="{{ $discussion->id }}">
+                               <input name="user_id" type="hidden" value="{{ Auth::user()->id }}">
                                <div class="form-group reply-form_textarea" :class="[isEmpty ? 'has-error' : '']">
-                                   <textarea class="form-control" name="body" id="content" cols="50" rows="10" placeholder="支持Markdown语法" v-model="newMessage.body"></textarea>
+                                   <textarea class="form-control" name="body" id="body" cols="50" rows="10" placeholder="支持Markdown语法" v-model="newMessage.body"></textarea>
                                    @if ($errors->has('body'))
                                        <span class="help-block">
                                            <strong>{{ $errors->first('body') }}</strong>
@@ -177,7 +182,6 @@
                                <div class="col-md-8">
                                    <div class="file-dropzone reply-form_images dz-clickable dz-started" id="dropzone">
                                        <p class="dz-message" id="uploaded-message" style="font-weight: bold;">评论图片拖到这里上传</p>
-                                       {{--<input name="file" type="file" multiple />--}}
                                    </div>
                                </div>
                                <div class="col-md-offset-1">
@@ -217,12 +221,11 @@
                 previewTemplate:document.querySelector('#preview-template').innerHTML
             });
             myDropzone.on('success',function(file,response){
-                console.log(file);
-                var caretPosition = document.getElementById("content").selectionStart;
-                var textArea = $("#content");
+                var caretPosition = document.getElementById("body").selectionStart;
+                var textArea = $("#body");
                 var textAreaTxt = textArea.val();
-                var insertText = response.url+"\n \n";
-                textArea.val(textAreaTxt.substring(0, caretPosition) + insertText + textAreaTxt.substring(caretPosition) );
+                var insertText = response.url;
+                textArea.val(textAreaTxt.substring(0, caretPosition) + '![图片描述]('+insertText+')');
                 textArea.focus();
                 $('#uploaded-message').addClass('success-message').text('图片上传成功,再次拖拽可以再次上传');
             });

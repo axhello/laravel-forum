@@ -13,6 +13,7 @@
                 body  :""
             },
             newComment  : {
+                discussion_id:"{{ $discussion->id }}",
                 body:""
             }
         },

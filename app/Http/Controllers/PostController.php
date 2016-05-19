@@ -81,12 +81,7 @@ class PostController extends Controller
         $comments = $discussion->comments()->paginate(10);
         $html = $this->markdown->markdown($discussion->body);
 
-//        if (\Auth::check()) {
-        $like1= Like::lists('name')->toArray();
-        $like2= Like::lists('comment_id')->toArray();
-        $like3= Like::lists('name','comment_id')->toArray();
-        $arr = array_merge($like1,$like2);
-        return view('forum.show', compact('discussion', 'favorites', 'comments', 'html', 'likes'));
+        return view('forum.show', compact('discussion', 'favorites', 'comments', 'html'));
     }
 
     /**

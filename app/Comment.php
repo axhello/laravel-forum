@@ -18,12 +18,12 @@ class Comment extends Model
     public function discussions()
     {
         //$comment-discussions
-        return $this->belongsTo(Discussion::class,'discussion_id');
+        return $this->belongsTo(Discussion::class, 'discussion_id');
     }
 
     public function likes()
     {
-        return $this->belongsToMany(Like::class);
+        return $this->hasMany(Like::class);
     }
 
     public function scopeUpdatedAt()

@@ -79,7 +79,7 @@
                                             </small>
                                         </div>
                                         <div class="panel-body">
-                                            {!! str_limit(strip_tags($comment->body),100) !!}
+                                            {!! $comment->body !!}
                                         </div>
                                     </div>
                                 </div>
