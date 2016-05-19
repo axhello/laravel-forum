@@ -100,7 +100,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{--{{ dd($comment->likes->lists('name')->toArray()) }}--}}
                                     <footer class="Comment_footer clearfix">
                                         <div class="thumbs-like pull-left">
                                             <forum-post-like-button
@@ -110,9 +109,7 @@
                                                     @else
                                                     current-user=""
                                                     @endif
-                                                    {{--@foreach( as $like)--}}
                                                     user-liked="{{ implode(',', $comment->likes->lists('name')->toArray()) }}"
-                                                    {{--@endforeach--}}
                                             >
                                             </forum-post-like-button>
                                        </div>

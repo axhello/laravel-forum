@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\City\City;
 use App\Comment;
-use App\Geetest\GeetestLib;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\SaveInfoRequest;
@@ -43,11 +42,15 @@ class UsersController extends Controller
         return view('users.login');
     }
 
+    /**
+     * @return mixed
+     */
     public function captcha()
     {
         $captcha = new GeeCaptcha(env('CAPTCHA_ID'), env('PRIVATE_KEY'));
         return $captcha->GTServerIsNormal();
     }
+
     /**
      * @param RegisterRequest $request
      * @return \Illuminate\Http\RedirectResponse
@@ -89,7 +92,6 @@ class UsersController extends Controller
      */
     public function signin(LoginRequest $request)
     {
-//        dd($request->all());
         $remember = ($request->has('remember')) ? true : false;
         $user = \Auth::attempt([
             'email' => $request->get('email'),
@@ -255,7 +257,16 @@ class UsersController extends Controller
         if ($authUser = User::where('email', $githubUser->getEmail())->first()) {
             return $authUser;
         }
-        return User::create(['name' => $githubUser->getNickname(), 'avatar' => $githubUser->getAvatar(), 'confirm_code' => str_random(48), 'email' => $githubUser->getEmail(), 'password' => bcrypt(str_random(16)), 'blog' => $githubUser->getOriginal()['blog'], 'github' => $githubUser->getOriginal()['html_url'], 'is_confirmed' => 1]);
+        return User::create([
+            'name' => $githubUser->getNickname(),
+            'avatar' => $githubUser->getAvatar(),
+            'confirm_code' => str_random(48),
+            'email' => $githubUser->getEmail(),
+            'password' => bcrypt(str_random(16)),
+            'blog' => $githubUser->getOriginal()['blog'],
+            'github' => $githubUser->getOriginal()['html_url'],
+            'is_confirmed' => 1
+        ]);
     }
 
 }

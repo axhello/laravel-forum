@@ -18,11 +18,18 @@ class PasswordController extends Controller
         $this->middleware('users');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function change()
     {
         return view('users.passwords.change');
     }
 
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function changePass(Request $request)
     {
         $old_pass = $request->get('old_password');

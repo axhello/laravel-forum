@@ -20,6 +20,10 @@ class CommentsController extends Controller
         $this->markdown = $markdown;
     }
 
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), ['body' => 'required']);
@@ -36,6 +40,10 @@ class CommentsController extends Controller
         return response()->json([ 'html' => $html ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function upload(Request $request)
     {
         $disk = QiniuStorage::disk('qiniu');

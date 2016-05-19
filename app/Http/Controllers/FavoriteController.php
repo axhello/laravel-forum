@@ -13,12 +13,9 @@ use Illuminate\Support\Facades\Response;
 class FavoriteController extends Controller
 {
     /**
-     * FavoriteController constructor.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function __construct()
-    {
-//        $this->middleware('users');
-    }
     public function store(Request $request)
     {
         \Auth::user()->favorites()->attach($request->get('discussion_id'));
@@ -26,22 +23,24 @@ class FavoriteController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
         \Auth::user()->favorites()->detach($id);
         return redirect()->back();
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function favorites()
     {
         $user = User::findOrFail(\Auth::user()->id);
         $favorites = $user->favorites()->paginate(15);
-//        dd($favorites);
         return view('users.favorites',compact('user','favorites'));
     }
 
-    public function check()
-    {
-
-    }
 }

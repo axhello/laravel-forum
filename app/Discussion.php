@@ -20,9 +20,12 @@ class Discussion extends Model
         ]
     ];
 
+    /**
+     * $discussion->user 可以拿到帖子对应的用户
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
-        //$discussion->user 可以拿到帖子对应的用户
         return $this->belongsTo(User::class);
     }
 
