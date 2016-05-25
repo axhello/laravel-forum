@@ -9,15 +9,6 @@ use App\Http\Requests;
 
 class PasswordController extends Controller
 {
-
-    /**
-     * PasswordController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('users');
-    }
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

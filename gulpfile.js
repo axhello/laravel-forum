@@ -20,7 +20,8 @@ elixir(function(mix) {
         'font-awesome.min.css',
         'jquery.Jcrop.css',
         'select2.min.css',
-        'sweet-alert.css'
+        'sweet-alert.css',
+        'style.css'
     ]).version('css/all.css');
 
     mix.scripts([

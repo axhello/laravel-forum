@@ -1,8 +1,6 @@
 <?php
 
-//\Auth::loginUsingId(2);
 Route::group(['middleware' => 'web'], function () {
-//    Route::auth();
     Route::get('/user/register', 'UsersController@register');
     Route::get('/user/login', 'UsersController@login');
     Route::post('/user/register', 'UsersController@create');

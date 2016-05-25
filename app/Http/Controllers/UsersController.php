@@ -23,7 +23,6 @@ class UsersController extends Controller
     public function __construct(City $city)
     {
         $this->city = $city;
-        $this->middleware('users', ['only' => ['profile', 'account', 'saveInfo', 'changeAvatar', 'cropAvatar']]);
     }
 
     /**

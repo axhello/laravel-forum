@@ -32,8 +32,11 @@
                                             </span>
                                         </div>
                                     </h4>
-                                    <a class="author" href="/user/{{ $discussion->user->name }}">{{ $discussion->user->name }}</a>
-                                    <p class="meta">更新于 {{ $discussion->updatedat() }}</p>
+
+                                    <p class="meta">
+                                        <a class="author" href="/user/{{ $discussion->user->name }}">{{ $discussion->user->name }}</a>
+                                        更新于 {{ $discussion->updatedat() }}
+                                    </p>
                                 </div>
                             </div>
                         </div>

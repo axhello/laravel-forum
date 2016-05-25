@@ -22,11 +22,13 @@
                         <li>个人网站：{{ $user->blog }}</li>
                     </ul>
                 </div>
+                @if(Auth::check() && $user->id == Auth::id())
                 <div class="col-md-2 pull-right">
                     <div class="edit-info">
                         <a class="btn btn-danger btn-lg" href="/user/account" role="button">编辑资料</a>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

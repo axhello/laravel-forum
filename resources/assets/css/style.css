@@ -96,3 +96,14 @@
 .favorites.doned {
     display: none;
 }
+
+.content ul, .content ol {
+    padding: 15px;
+    -webkit-padding-start: 15px;
+}
+.content ul li {
+    list-style-type: disc;
+}
+.content ol li {
+    list-style-type: decimal;
+}
